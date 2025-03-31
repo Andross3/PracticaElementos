@@ -1,33 +1,26 @@
-
-/**
- * Write a description of class Ej26 here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+/*Escribir un proceso recursivo para reconocer si una cadena dada es de la forma anbn; es decir n a’s
+consecutivas seguidas de n b’s consecutivas.
+**/
 public class Ej26
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Ej26
-     */
-    public Ej26()
-    {
-        // initialise instance variables
-        x = 0;
+    public String letrasConsecutivas(String cadena){
+        if(cadena.length() == 1){
+          return cadena.charAt(0)+"1";
+        }
+        return letrasConsecutivas(cadena, ""+cadena.charAt(0), 0, 0, cadena.length(),"");
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    private String letrasConsecutivas(String cadena, String letra, int cont, int pos, int tamCadena, String res){
+        if(pos == tamCadena){ 
+                return res + letra + cont;
+        }else{
+            String aux = ""+cadena.charAt(pos);
+            if(letra.equals(aux)){
+                //Contar las letras iguales
+                return letrasConsecutivas(cadena, letra, cont+1, pos+1, tamCadena, res);    
+            }else{
+                //Mover a la siguiente letra distinta
+                return letrasConsecutivas(cadena, cadena.charAt(pos)+"", 0, pos, tamCadena, res + letra + cont);
+            }
+        }
     }
 }
